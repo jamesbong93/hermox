@@ -15,8 +15,10 @@ class CreateOrdersProductsTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('total_price', 8, 2);
-            $table->float('shipping_price', 8, 2);
+            $table->float('net_price', 8, 2);
+            $table->float('list_price', 8, 2);
+            $table->float('discount', 8, 2);
+            $table->float('shipping_fee', 8, 2);
             $table->integer('user_id')->unsigned();
             $table->integer('shipping_country_id')->unsigned();
             $table->timestamps();
