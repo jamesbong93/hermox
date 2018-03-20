@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->text('description')->nullable();
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->timestamps();
@@ -25,6 +26,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->text('description')->nullable();
             $table->float('selling_price', 8, 2);
             $table->float('retail_price', 8, 2);
             $table->integer('brand_id')->unsigned();

@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the order associated with the users.
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order', 'user_id', 'id');
+    }
 }
