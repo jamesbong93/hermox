@@ -1,0 +1,95 @@
+.thumbnail {border:0;}
+.bootstrap-tagsinput {width:100%;}
+.tag-col-3-left {width:30%; float:left;}
+.tag-col-7-left {width:70%; float:left;}
+
+.comment-list .content {min-height: auto;}
+.comment-list .badge {border-radius:2px; }
+.comment-list p {margin: 0;}
+.comment-list .panel {margin-bottom: 5px;}
+
+.comment-list .hidden-reply {display: none;}
+.comment-list .visible {display:inherit;}
+.comment-list .toggle-all {cursor: pointer;}
+.add-comment {cursor: pointer;}
+.comment-list .actions span {
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px 5px 0px 5px;
+}
+.comment-list .action {
+    color: #999;
+    font-weight: bold;
+    vertical-align: inherit;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+.comment-list .highlight-font-bold {    
+    color: #2793e6 !important;
+    font-weight: bold;
+    padding:10px 0}
+.comment-list .row {
+    margin-bottom: 0px;
+}
+.comment-list .panel .panel-heading {
+    padding: 10px 15px;
+    border:none;
+    /*Panel-heading border radius*/
+    border-top-right-radius:0px;
+    top: 1px;
+}
+.comment-list .panel .panel-heading.right {
+    border-right-width: 0px;
+    /*Panel-heading border radius*/
+    border-top-left-radius:0px;
+    right: 16px;
+}
+.comment-list figcaption {
+    font-size: 13px;
+}
+
+/* Portrait tablets and medium desktops */
+@media (min-width: 768px) {
+    .comment-list .arrow:after, .comment-list .arrow:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-color: transparent;
+    }
+    .comment-list .panel.arrow.left:after, .comment-list .panel.arrow.left:before {
+        border-left: 0;
+    }
+    /*****Left Arrow*****/
+    /*Outline effect style*/
+    .comment-list .panel.arrow.left:before {
+        left: 0px;
+        top: 40px;
+        /*Use boarder color of panel*/
+        border-right-color: inherit;
+        border-width: 16px;
+    }
+    /*Background color effect*/
+    .comment-list .panel.arrow.left:after {
+        left: 1px;
+        top: 41px;
+        /*Change for different outline color*/
+        border-right-color: #FFFFFF;
+        border-width: 15px;
+    }
+}
+.comment-list .comment-post {
+    margin-top: 6px;
+}
+@media screen and (max-width: 48em){
+    .text-right{ text-align: left;}
+}
+.email_ww {
+    word-wrap: break-word;
+}
