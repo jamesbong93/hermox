@@ -20,12 +20,14 @@ class CreateOrdersProductsTable extends Migration
             $table->float('discount', 8, 2);
             $table->float('shipping_fee', 8, 2);
             $table->integer('user_id')->unsigned();
+            $table->integer('promotion_code_id')->unsigned()->nullable();
             $table->integer('shipping_country_id')->unsigned();
             $table->timestamps();
         });
 
         // set up orders reference key
         Schema::table('orders', function(Blueprint $table) {
+           $table->foreign('promotion_code_id')->references('id')->on('countries')->onDelete('cascade');
            $table->foreign('shipping_country_id')->references('id')->on('countries')->onDelete('cascade');
            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -52,6 +54,7 @@ class CreateOrdersProductsTable extends Migration
     public function down()
     {
         Schema::table('orders', function(Blueprint $table) {
+           $table->dropForeign('orders_promotion_code_id_foreign');
            $table->dropForeign('orders_shipping_country_id_foreign');
            $table->dropForeign('orders_user_id_foreign');
         });
