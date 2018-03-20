@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/processOrder', 'OrderController@processOrder')->name('processOrder');
+Route::get('/checkout/{product_id}/{product_quantity}', 'OrderController@index')->name('checkout');
+Route::get('/checkPromotionCode', 'OrderController@checkPromotionCode')->name('checkPromotionCode');
+Route::get('/totalPrice', 'OrderController@totalPrice')->name('totalPrice');
+Route::get('/completeOrder', 'OrderController@completeOrder')->name('completeOrder');
+
+
