@@ -67,7 +67,12 @@
     opacity: 1;
     filter: alpha(opacity=100);
 }
-
+.price_discounted {
+    color: #343a40;
+    text-align: center;
+    text-decoration: line-through;
+    font-size: 70%;
+}
     </style>
 @endsection
 @section('content')
@@ -93,7 +98,12 @@
                     	<h4>{{ $product->brand->name }}</h4>
                     </div>
                     <div class="panel panel-default text-center">
-                        <h3>Quantity</h3>
+                        <h3>Selling Price</h3>
+                        <hr>
+                        <h4>RM {{ $product->selling_price }} <span class="price_discounted">RM {{ $product->retail_price }}</span></h4>
+                    </div>
+                    <div class="panel panel-default text-center">
+                        <h3>Purchase Quantity</h3>
                         <hr>
                     	<h4>{{ $purchase_quantity }}</h4>
                     </div>
