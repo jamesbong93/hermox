@@ -9,7 +9,7 @@
             margin-top: 5px;
         }
         .price{
-            font-size: 30px;
+            font-size: 25px;
             margin: 0 auto;
             color: #333;
         }
@@ -38,6 +38,11 @@
         img {
             width: 100%;
         }
+        .price_discounted {
+            color: #343a40;
+            text-align: center;
+            text-decoration: line-through;
+        }
     </style>
 @endsection
 @section('content')
@@ -62,6 +67,7 @@
                 <div class="row">
                     <div class="col-md-8 col-sm-6">
                         <span class="price">RM {{ $product->selling_price }}</span>
+                        <span class="price_discounted">RM {{ $product->retail_price }}</span>
                         <select id="product-quantity_{{ $product->id }}">
                             @for ($i = 1; $i <= $product->quantity; $i++)
                                 <option value="{{ $i }}">{{ $i }}</option>
