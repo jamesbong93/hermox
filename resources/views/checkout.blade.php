@@ -228,6 +228,10 @@
         }
 
         function confirmOrder() {
+            var promotion_code = $('#promotion-code').val();
+            if ($('#promo-change-btn').is(":hidden")) {
+                promotion_code = '';
+            }
             var r = confirm("Are you sure to complete this order?");
             if (r == true) {
                 $.ajax({
@@ -236,10 +240,18 @@
                     dataType: 'json',
                     data: {
                         'product_id': '{{ $product->id }}',
-                        'product_quantity': $("#product-quantity_" + $(this).attr("data-productId")) .val()
+                        'purchase_quantity': "{{ $purchase_quantity }}",
+                        'promotion_code': promotion_code,
+                        'net_price': $('#total-price').text(),
+                        'discount': $('#discount').text(),
+                        'shipping_fee': $('#shipping-fee').text(),
+                        'shipping_country': $('#shipping-country').val(),
                     },
                     success: function(data) {
-                        window.location.href = data['redirect'];
+                        if (data['status'] == 'success') {
+                            alert('Congratulation you have completed your order!')
+                            window.location.href = "{{ route('home') }}";   
+                        }
                     }
                 });
             }

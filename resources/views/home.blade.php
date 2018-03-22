@@ -45,7 +45,7 @@
     <div class="row">
         <!-- BEGIN PRODUCTS -->
         @foreach ($products as $product)
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-6" style="margin-top: 20px;">
             <span class="thumbnail">
                 <img src="http://placehold.it/500x400" alt="..."><br><br>
                 <h4>{{ $product->brand->name }}</h4>
@@ -60,7 +60,7 @@
                 <p>{{ $product->description }}</p>
                 <hr class="line">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-8 col-sm-6">
                         <span class="price">RM {{ $product->selling_price }}</span>
                         <select id="product-quantity_{{ $product->id }}">
                             @for ($i = 1; $i <= $product->quantity; $i++)
@@ -68,7 +68,7 @@
                             @endfor
                         </select>
                     </div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-4 col-sm-6">
                         <button class="btn btn-success right buy-btn" data-productId="{{ $product->id }}"> BUY ITEM</button>
                     </div>
                 </div>
