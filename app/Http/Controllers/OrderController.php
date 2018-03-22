@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\PromotionCode;
 use Illuminate\Http\Request;
 use Illuminate\Routing\redirect;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
@@ -51,8 +53,14 @@ class OrderController extends Controller
      */
     public function totalPrice(Request $request)
     {
-    	$product = Product::find($request['product_id']);
-    	$price = $product->selling_price * $request['purchase_quantity'];
+        $order = $this->getTotalPrice($request);
+        return response()->json(['status' => 'success', 'totalPrice' => $order[0]['totalPrice'], 'discount' => $order[0]['discount'], 'shippingFee' => $order[0]['shippingFee'] ]);
+    }
+
+    public function getTotalPrice($request) {
+        $order = [];
+        $product = Product::find($request['product_id']);
+        $price = $product->selling_price * $request['purchase_quantity'];
         $discount = 0;
         $promotion_code = $request['promotion_code'];
         if ($promotion_code) {
@@ -61,8 +69,8 @@ class OrderController extends Controller
         $price = $price - $discount;
         $shippingFee = $this->shippingFee($request['shipping_country'], $price, $request['purchase_quantity']);
         $totalPrice = round(($price + $shippingFee), 2);
-
-        return response()->json(['status' => 'success', 'totalPrice' => $totalPrice, 'discount' => $discount, 'shippingFee' => $shippingFee]);
+        array_push($order, ['totalPrice' => $totalPrice, 'discount' => $discount, 'shippingFee' => $shippingFee]);
+        return $order;
     }
 
     public function shippingFee($shipping_country, $price, $purchase_quantity)
@@ -135,6 +143,24 @@ class OrderController extends Controller
 
     public function completeOrder(Request $request)
     {
-        
+        $datas = $this->getTotalPrice($request);
+        $product = Product::find($request['product_id']);
+        $promotion = PromotionCode::where('name', $request['promotion_code'])->first();
+        foreach ($datas as $data) {
+            //save new order
+            $order = new Order([
+                'net_price' => $data['totalPrice'],
+                'list_price' => $product->selling_price * $request['purchase_quantity'],
+                'discount' => $data['discount'],
+                'shipping_fee' => $data['shippingFee'],
+                'purchase_quantity' => $request['purchase_quantity'],
+                'user_id' => Auth::user()->id,
+                'promotion_code_id' => ($promotion ? $promotion->id : null),
+                'shipping_country_id' => $request['shipping_country']
+            ]);
+            $order->save();
+            $order->products()->sync([$product->id]);
+        }
+        return response()->json(['status' => 'success']);
     }
 }

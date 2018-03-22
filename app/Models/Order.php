@@ -29,7 +29,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['net_price', 'list_price', 'discount', 'shipping_fee', 'user_id', 'promotion_code_id', 'shipping_country_id'];
+    protected $fillable = ['net_price', 'list_price', 'discount', 'shipping_fee', 'user_id', 'promotion_code_id', 'shipping_country_id', 'purchase_quantity'];
     
     /**
      * Get the user associated with the orders.
