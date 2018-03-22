@@ -78,7 +78,7 @@ class OrderController extends Controller
     	$shippingFee = 0;
     	switch ($shipping_country) {
     		case 1:
-    			if ($purchase_quantity < 2 || $price < 150) {
+    			if ($purchase_quantity < 2 && $price < 150) {
     				$shippingFee = 10;
     			}
     			break;
