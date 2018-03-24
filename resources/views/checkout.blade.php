@@ -87,7 +87,9 @@
             <div class="wrapper row">
                 <div class="preview col-md-6">
                     <div class="preview-pic tab-content">
-                        <div class="tab-pane active" id="pic-1"><img src="http://placehold.it/500x400"/></div>
+                        <div class="tab-pane active text-center" id="pic-1">
+                            <img src="http://placehold.it/500x400" style="width: 350px;"/>
+                        </div>
                     </div>
                 </div>
                 <div class="details col-md-6">
@@ -135,7 +137,7 @@
 			                <span id="invalid-code" class="text-danger text-center" style="display: none;">This code is invalid </span>
                             <div class="text-center"><br>
                                 <button class="btn btn-primary" id="promo-apply-btn" style="display: none;" type="button" onclick="applyPromoCode()">Apply</button>
-                                <button class="btn btn-info" id="promo-check-btn" type="button" onclick="checkPromotionCode()">Check</button>
+                                <button class="btn btn-success" id="promo-check-btn" type="button" onclick="checkPromotionCode()">Check</button>
                                 <button class="btn btn-warning" id="promo-change-btn" type="button" onclick="changePromoCode()" style="display: none;">Change</button>
                             </div>
 			            </div>
@@ -147,7 +149,7 @@
                         <h2><font color="purple">RM <span id="total-price"></span></h2>
                     </div>
                     <div class="text-center">
-                        <button class="add-to-cart btn btn-default" type="button" onclick="confirmOrder()">Confirm</button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="confirmOrder()">Confirm Checkout</button>
                     </div>
                 </div>
             </div>
@@ -265,7 +267,7 @@
                     success: function(data) {
                         if (data['status'] == 'success') {
                             alert('Congratulation you have completed your order!')
-                            window.location.href = "{{ route('home') }}";   
+                            window.location.href = data['redirect'];   
                         }
                     }
                 });

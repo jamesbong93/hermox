@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button class="btn btn-success right buy-btn" data-productId="{{ $product->id }}"> BUY ITEM</button>
+                        <button class="btn btn-primary right buy-btn" data-productId="{{ $product->id }}"> BUY ITEM</button>
                     </div>
                     @else 
                     <div class="col-md-12 sold-out text-center">
