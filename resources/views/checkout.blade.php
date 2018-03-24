@@ -3,76 +3,80 @@
     <link href="/css/order.css" rel="stylesheet" type="text/css">
     <style type="text/css">
     	.mat-input{
-    margin: 2% auto;
-    width: 50%;    
-}
-.mat-input-outer{
-    display: table;
-    width: 100%;
-    position: relative;
-}
-.mat-input-outer input{
-    height: 50px;
-    border-radius: 0;
-    border: none;
-    width: 100%;    
-    padding: 0 15px;
-    font-family: calibri;
-    font-size: 20px;
-    font-style: italic;
-}
-.mat-input-outer label{
-    font-family: calibri;
-    font-size: 20px;
-    left: 15px;
-    position: absolute;
-    top: 18px;
-    font-style: italic;
-    transition: .2s;
-    color: #000;
-    cursor: text;
-    font-weight: normal;
-    opacity: 0.4;
-    filter: alpha(opacity=40);
-}
-.mat-input-outer .border{
-    height: 1px;
-    background: #000;
-    transition: .3s;
-    -webkit-transition: .3s;
-    -ms-transition: .3s;
-}
-.mat-input-outer .border::before{
-    content: " ";
-    display: table;
-    height: 3px;
-    width: 0%;
-    background: transparent;
-    transition: .3s;
-    -webkit-transition: .3s;
-    -ms-transition: .3s;
-    margin: 0 auto;
-}
-.mat-input-outer input:focus ~ .border{
-    background: transparent;
-}
-.mat-input-outer input:focus ~ .border::before{
-    width: 100%;
-    background: purple;
-}
-.mat-input-outer input + label.active{
-    left: 5px;
-    top: -25px;
-    color: purple;
-    opacity: 1;
-    filter: alpha(opacity=100);
-}
-.price_discounted {
-    color: #343a40;
-    text-align: center;
-    text-decoration: line-through;
-    font-size: 70%;
-}
+            margin: 2% auto;
+            width: 50%;    
+        }
+        h4 {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .mat-input-outer{
+            display: table;
+            width: 100%;
+            position: relative;
+        }
+        .mat-input-outer input{
+            height: 50px;
+            border-radius: 0;
+            border: none;
+            width: 100%;    
+            padding: 0 15px;
+            font-family: calibri;
+            font-size: 20px;
+            font-style: italic;
+        }
+        .mat-input-outer label{
+            font-family: calibri;
+            font-size: 20px;
+            left: 15px;
+            position: absolute;
+            top: 18px;
+            font-style: italic;
+            transition: .2s;
+            color: #000;
+            cursor: text;
+            font-weight: normal;
+            opacity: 0.4;
+            filter: alpha(opacity=40);
+        }
+        .mat-input-outer .border{
+            height: 1px;
+            background: #000;
+            transition: .3s;
+            -webkit-transition: .3s;
+            -ms-transition: .3s;
+        }
+        .mat-input-outer .border::before{
+            content: " ";
+            display: table;
+            height: 3px;
+            width: 0%;
+            background: transparent;
+            transition: .3s;
+            -webkit-transition: .3s;
+            -ms-transition: .3s;
+            margin: 0 auto;
+        }
+        .mat-input-outer input:focus ~ .border{
+            background: transparent;
+        }
+        .mat-input-outer input:focus ~ .border::before{
+            width: 100%;
+            background: purple;
+        }
+        .mat-input-outer input + label.active{
+            left: 5px;
+            top: -25px;
+            color: purple;
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+        .price_discounted {
+            color: #343a40;
+            text-align: center;
+            text-decoration: line-through;
+            font-size: 70%;
+        }
     </style>
 @endsection
 @section('content')
@@ -88,37 +92,39 @@
                 </div>
                 <div class="details col-md-6">
                     <div class="panel panel-default text-center">
-                        <h3>Name</h3>
+                        <h4>Name</h4>
                         <hr>
-                    	<h4>{{ $product->name }}</h4>
+                    	<p>{{ $product->name }}</p>
                     </div>
                     <div class="panel panel-default text-center">
-                        <h3>Brand</h3>
+                        <h4>Brand</h4>
                         <hr>
-                    	<h4>{{ $product->brand->name }}</h4>
+                    	<p>{{ $product->brand->name }}</p>
                     </div>
                     <div class="panel panel-default text-center">
-                        <h3>Selling Price</h3>
+                        <h4>Selling Price</h4>
                         <hr>
-                        <h4>RM {{ $product->selling_price }} <span class="price_discounted">RM {{ $product->retail_price }}</span></h4>
+                        <p>RM {{ $product->selling_price }} <span class="price_discounted">RM {{ $product->retail_price }}</span></p>
                     </div>
                     <div class="panel panel-default text-center">
-                        <h3>Purchase Quantity</h3>
+                        <h4>Purchase Quantity</h4>
                         <hr>
-                    	<h4>{{ $purchase_quantity }}</h4>
+                    	<p>{{ $purchase_quantity }}</p>
                     </div>
                     <div class="panel panel-default text-center">
-                            <h3>Shipping Country</h3>
+                            <h4>Shipping Country</h4>
                             <hr>
-                           	<select id="shipping-country" name='beden' class="form-control" name="size">
-                           		@foreach ($countries as $country) 
-									<option value="{{ $country->id }}">{{ $country->name }}</option>
-								@endforeach
-		                    </select>
+                            <div class="col-md-12">
+                                <select id="shipping-country" name='beden' class="form-control" name="size">
+                                    @foreach ($countries as $country) 
+                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                    @endforeach
+                            </select>
+                            </div>
                         <br>
                     </div>
                     <div class="panel panel-default text-center">
-                        <h3>Promotion Code</h3>
+                        <h4>Promotion Code</h4>
                         <hr>
                         <div class="mat-input">
 			                <div class="mat-input-outer">
@@ -135,7 +141,7 @@
 			            </div>
                     </div>
                     <div class="panel panel-default text-center">
-                        <h3>Total Price</h3>
+                        <h4>Total Price</h4>
                         <hr>
                         <p class="text-muted">RM {{ $product->selling_price * $purchase_quantity}} <span id="discount" style="display: none"> - RM <span></span></span> <span id="shipping-fee" style="display: none"> + RM <span></span></span> </p>
                         <h2><font color="purple">RM <span id="total-price"></span></h2>
@@ -161,7 +167,6 @@
             if ($('#promo-change-btn').is(":hidden")) {
                 promotion_code = '';
             }
-            console.log(promotion_code);
 			$.ajax({
                 url: '{{ route("totalPrice") }}',
                 type: 'get',

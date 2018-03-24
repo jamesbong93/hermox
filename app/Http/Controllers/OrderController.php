@@ -9,6 +9,7 @@ use App\Models\PromotionCode;
 use Illuminate\Http\Request;
 use Illuminate\Routing\redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
@@ -123,7 +124,7 @@ class OrderController extends Controller
         $promotion_code = $request['promotion_code'];
         $price = $product->selling_price * $purchase_quantity;
 
-    	if (!PromotionCode::where('name', $promotion_code)->exists()) {
+    	if (!PromotionCode::where(DB::raw('BINARY `name`'), $promotion_code)->exists()) {
         	return response()->json(['status' => 'failed', 'content' => 'This promo code is invalid']);
     	}
         switch ($promotion_code) {
