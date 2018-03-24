@@ -17,6 +17,11 @@
             float:right;
             border-bottom: 2px solid #4B8E4B;
         }
+        .product-name {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
         .thumbnail{
             opacity:0.70;
             -webkit-transition: all 0.5s; 
@@ -54,7 +59,7 @@
             <span class="thumbnail">
                 <img src="http://placehold.it/500x400" alt="..."><br><br>
                 <h4>{{ $product->brand->name }}</h4>
-                <h5>{{ $product->name }}</h5>
+                <h5 class="product-name" title="{{ $product->name }}">{{ $product->name }}</h5>
                 <div class="ratings">
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
@@ -62,19 +67,30 @@
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                 </div>
-                <p>{{ $product->description }}</p>
                 <hr class="line">
                 <div class="row">
-                    <div class="col-md-8 col-sm-6">
+                    <div class="col-md-8">
                         <span class="price">RM {{ $product->selling_price }}</span>
                         <span class="price_discounted">RM {{ $product->retail_price }}</span>
-                        <select id="product-quantity_{{ $product->id }}">
-                            @for ($i = 1; $i <= $product->quantity; $i++)
+                    </div>
+                    <div class="col-md-12 input-group mb-3 mt-3">
+                        <div class="input-group-prepend">
+                            <button type="button" data-productId="{{ $product->id }}" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-field="">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <select class="form-control" id="product-quantity_{{ $product->id }}" name="quantity" data-quantity="{{ $product->quantity }}" value="1">
+                            @for ($i=1; $i<=$product->quantity; $i++)
                                 <option value="{{ $i }}">{{ $i }}</option>
                             @endfor
                         </select>
+                        <div class="input-group-append">
+                            <button type="button" data-productId="{{ $product->id }}" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-12">
                         <button class="btn btn-success right buy-btn" data-productId="{{ $product->id }}"> BUY ITEM</button>
                     </div>
                 </div>
@@ -107,6 +123,25 @@
                 });
             } else {
                 
+            }
+        });
+
+        var quantity = 1;
+
+        $('.quantity-right-plus').click(function(e){
+            e.preventDefault();
+            var maxQuantity = $('#product-quantity_' + $(this).attr("data-productId")).attr("data-quantity");
+            var quantity = parseInt($('#product-quantity_' + $(this).attr("data-productId")).val());
+            if (quantity < maxQuantity) {
+                $('#product-quantity_' + $(this).attr("data-productId")).val(quantity + 1);
+            }
+        });
+
+        $('.quantity-left-minus').click(function(e){
+            e.preventDefault();
+            var quantity = parseInt($('#product-quantity_' + $(this).attr("data-productId")).val());
+            if(quantity > 1) {
+                $('#product-quantity_' + $(this).attr("data-productId")).val(quantity - 1);
             }
         });
     });
