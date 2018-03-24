@@ -161,6 +161,12 @@ class OrderController extends Controller
             ]);
             $order->save();
             $order->products()->sync([$product->id]);
+
+            // reduce product quantity
+            if ($product) {
+                $product->quantity = $product->quantity - $request['purchase_quantity'];
+                $product->save();
+            }
         }
         return response()->json(['status' => 'success']);
     }
