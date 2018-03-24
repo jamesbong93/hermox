@@ -23,5 +23,6 @@ Route::get('/checkout/{product_id}/{product_quantity}', 'OrderController@index')
 Route::get('/checkPromotionCode', 'OrderController@checkPromotionCode')->name('checkPromotionCode');
 Route::get('/totalPrice', 'OrderController@totalPrice')->name('totalPrice');
 Route::get('/completeOrder', 'OrderController@completeOrder')->name('completeOrder');
+Route::get('/orderSummary/{order_id}', 'OrderController@orderSummary')->name('orderSummary');
 
 

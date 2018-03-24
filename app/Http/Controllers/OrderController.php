@@ -161,7 +161,21 @@ class OrderController extends Controller
             ]);
             $order->save();
             $order->products()->sync([$product->id]);
+
+            // reduce product quantity
+            if ($product) {
+                $product->quantity = $product->quantity - $request['purchase_quantity'];
+                $product->save();
+            }
+            $redirect = route("orderSummary", [$order->id]);
+            return response()->json(['status' => 'success', 'redirect' => $redirect]);
         }
-        return response()->json(['status' => 'success']);
+    }
+
+    public function orderSummary($order_id)
+    {
+        $order = Order::find($order_id);
+        $orderProduct = $order->products->first();
+        return view('summary', compact('order', 'orderProduct'));
     }
 }
