@@ -48,6 +48,9 @@
             text-align: center;
             text-decoration: line-through;
         }
+        .sold-out {
+            margin-top: 20px;
+        }
     </style>
 @endsection
 @section('content')
@@ -73,6 +76,7 @@
                         <span class="price">RM {{ $product->selling_price }}</span>
                         <span class="price_discounted">RM {{ $product->retail_price }}</span>
                     </div>
+                    @if ($product->quantity > 1)
                     <div class="col-md-12 input-group mb-3 mt-3">
                         <div class="input-group-prepend">
                             <button type="button" data-productId="{{ $product->id }}" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-field="">
@@ -93,6 +97,11 @@
                     <div class="col-md-12">
                         <button class="btn btn-success right buy-btn" data-productId="{{ $product->id }}"> BUY ITEM</button>
                     </div>
+                    @else 
+                    <div class="col-md-12 sold-out text-center">
+                        <h2>Sold Out</h2>
+                    </div>
+                    @endif
                 </div>
             </span>
         </div>
